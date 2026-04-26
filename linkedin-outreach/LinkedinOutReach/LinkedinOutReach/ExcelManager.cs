@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,29 @@ namespace LinkedinOutReach
 {
     internal class ExcelManager
     {
-        private string filePath { get; set; }
-        private string[] linkedinProfiles { get; }
+        private LinkedinProfile[] _linkedinProfiles;
 
         public void loadLinkedinProfiles()
         {
-            
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "input", "linkedin_profiles.csv");
+
+            string[] lines = File.ReadAllLines(filePath);
+
+            _linkedinProfiles = new LinkedinProfile[lines.Length];
+            for(int i=0; i<lines.Length; i++)
+            {
+                string line = lines[i];
+                string[] columns = line.Split(',');
+                
+                LinkedinProfile linkedinProfile = new LinkedinProfile
+                (
+                    columns[0],
+                    columns[1],
+                    columns[2],
+                    columns[3]
+                );
+                _linkedinProfiles[i] = linkedinProfile;
+            }
         }
     }
 }

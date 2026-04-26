@@ -1,0 +1,7 @@
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\bin\Debug\LinkedinOutReach.exe.config
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\bin\Debug\LinkedinOutReach.exe
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\bin\Debug\LinkedinOutReach.pdb
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\obj\Debug\LinkedinOutReach.csproj.AssemblyReference.cache
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\obj\Debug\LinkedinOutReach.csproj.CoreCompileInputs.cache
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\obj\Debug\LinkedinOutReach.exe
+C:\Users\nabil\OneDrive\Documents\My Projects\2026_04_linkedin_outreach\linkedin-outreach\linkedin-outreach\LinkedinOutReach\LinkedinOutReach\obj\Debug\LinkedinOutReach.pdb

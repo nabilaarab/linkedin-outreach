@@ -10,6 +10,9 @@ namespace LinkedinOutReach
     {
         static void Main(string[] args)
         {
+            ExcelManager excelManager = new ExcelManager();
+
+            excelManager.loadLinkedinProfiles();
         }
     }
 }

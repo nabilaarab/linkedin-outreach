@@ -43,11 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserDriver.cs" />
+    <Compile Include="ExcelManager.cs" />
+    <Compile Include="LinkedinOutReachManager.cs" />
+    <Compile Include="LinkedinProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="input\linkedin_profiles.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

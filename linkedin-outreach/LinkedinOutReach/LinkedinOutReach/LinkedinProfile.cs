@@ -13,12 +13,7 @@ namespace LinkedinOutReach
         public string Name { get; }
         public string CompanyName { get; }
 
-        public LinkedinProfile(
-            string id, 
-            string link, 
-            string name, 
-            string companyName
-        ){
+        public LinkedinProfile(string id, string link, string name, string companyName){
             Id = id;
             Link = link;
             Name = name;
