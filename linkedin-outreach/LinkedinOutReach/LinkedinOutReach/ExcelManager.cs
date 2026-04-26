@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedinOutReach
 {
-    internal class ExcelManager
-    {
+    internal class ExcelManager {
         private LinkedinProfile[] _linkedinProfiles;
 
         public void loadLinkedinProfiles()
@@ -18,11 +14,11 @@ namespace LinkedinOutReach
             string[] lines = File.ReadAllLines(filePath);
 
             _linkedinProfiles = new LinkedinProfile[lines.Length];
-            for(int i=0; i<lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
                 string[] columns = line.Split(',');
-                
+
                 LinkedinProfile linkedinProfile = new LinkedinProfile
                 (
                     columns[0],
