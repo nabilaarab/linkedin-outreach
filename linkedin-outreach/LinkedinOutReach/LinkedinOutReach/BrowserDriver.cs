@@ -100,7 +100,7 @@ namespace LinkedinOutReach
 
         public void sendMessage(LinkedinProfile linkedinProfile)
         {
-
+            throw new NotImplementedException();
         }
 
         private async Task fillTextInputWithRetry(string selector, string value, int maxRetries = 3, int delayMin=500, int delayMax=1000)
