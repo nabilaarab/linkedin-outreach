@@ -8,9 +8,9 @@ namespace LinkedinOutReach
 {
     internal class BrowserDriver
     {
-        private IPlaywright _playwright = null!;
-        private IBrowser _browser = null!;
-        private IPage _page = null!;
+        public IPlaywright _playwright { get; private set; } = null!;
+        public IBrowser _browser { get; private set; } = null!;
+        public IPage _page { get; private set; } = null!;
 
         public async Task initBrowser()
         {
@@ -66,7 +66,6 @@ namespace LinkedinOutReach
 
             // Add note if wanted
             await sendConnexionWithNote(message);
-
 
             //await _page.ClickAsync("span:has-text('Connect')");
             //await Task.Delay(Random.Shared.Next(500, 1000)); // Attendre un peu pour simuler un comportement humain
