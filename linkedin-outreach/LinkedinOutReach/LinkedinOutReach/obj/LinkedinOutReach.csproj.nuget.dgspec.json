@@ -56,6 +56,14 @@
             "Microsoft.Playwright": {
               "target": "Package",
               "version": "[1.59.0, )"
+            },
+            "chromium": {
+              "target": "Package",
+              "version": "[2026.4.20, )"
+            },
+            "chromium.win-x64": {
+              "target": "Package",
+              "version": "[2026.4.20, )"
             }
           },
           "imports": [

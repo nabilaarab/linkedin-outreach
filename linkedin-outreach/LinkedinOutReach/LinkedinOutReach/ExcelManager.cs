@@ -5,7 +5,7 @@ using System.Text;
 namespace LinkedinOutReach
 {
     internal class ExcelManager {
-        private LinkedinProfile[] _linkedinProfiles;
+        public LinkedinProfile[] _linkedinProfiles;
 
         public void loadLinkedinProfiles()
         {

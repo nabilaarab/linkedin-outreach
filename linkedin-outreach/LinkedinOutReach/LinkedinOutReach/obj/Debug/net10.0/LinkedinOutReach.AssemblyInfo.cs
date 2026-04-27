@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LinkedinOutReach")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8faa3e6745fca5d0fd36b542845085157982f8b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e7451bc2f365ebeb30a9eadb79f1f233910a2f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("LinkedinOutReach")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LinkedinOutReach")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="chromium" Version="2026.4.20" />
+    <PackageReference Include="chromium.win-x64" Version="2026.4.20" />
     <PackageReference Include="Microsoft.Playwright" Version="1.59.0" />
   </ItemGroup>
 
