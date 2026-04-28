@@ -8,23 +8,19 @@ namespace LinkedinOutReach.browserDriverAction
     internal class BrowserDriverActionSendConnexion : BrowserDriverAction
     {
         public string _message { get; set; }
+
         public BrowserDriverActionSendConnexion(BrowserDriver browserDriver, string message) : base(browserDriver) { 
             this._message = message;
         }
 
         public override async Task Run(LinkedinProfile linkedinProfile)
         {
-            // Implementation for sending connection request
-        }
-        
-        public async Task sendConnexion(LinkedinProfile linkedinProfile, string message)
-        {
             // Go to the invite page
             string link = "https://www.linkedin.com/preload/custom-invite/?vanityName=" + linkedinProfile.Id;
             await this.goToPage(link);
 
             // Without note if wanted
-            if (message == "")
+            if (this._message == "")
             {
                 await sendConnexionWithoutNote();
 
@@ -32,7 +28,7 @@ namespace LinkedinOutReach.browserDriverAction
             }
 
             // Add note if wanted
-            await sendConnexionWithNote(message);
+            await sendConnexionWithNote(this._message);
 
             //await this._browser_page.ClickAsync("span:has-text('Connect')");
             //await Task.Delay(Random.Shared.Next(500, 1000)); // Attendre un peu pour simuler un comportement humain
@@ -42,27 +38,19 @@ namespace LinkedinOutReach.browserDriverAction
 
         private async Task sendConnexionWithoutNote()
         {
-            await this._browserDriver._page.ClickAsync("span:has-text('Envoyer sans note')");
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            await Task.Delay(Random.Shared.Next(3000, 3500));
+            await this.Click("span:has-text('Envoyer sans note')");
         }
 
         private async Task sendConnexionWithNote(string message)
         {
             // Add note if wanted
-            await this._browserDriver._page.ClickAsync("span:has-text('Ajouter une note')");
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            await Task.Delay(Random.Shared.Next(3000, 3500));
+            await this.Click("span:has-text('Ajouter une note')");
 
             // Fill the textarea
-            await this._browserDriver._page.FillAsync("textarea[name='message']", message);
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            await Task.Delay(Random.Shared.Next(3000, 3500));
+            await this.Fill("textarea[name='message']", message);
 
             // Send the connexion
-            await this._browserDriver._page.ClickAsync("span:has-text('Envoyer')");
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            await Task.Delay(Random.Shared.Next(3000, 3500));
+            await this.Click("span:has-text('Envoyer')");
         }
     }
 }

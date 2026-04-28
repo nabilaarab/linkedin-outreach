@@ -1,7 +1,5 @@
 ﻿using Microsoft.Playwright;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using NuGet.Protocol.Plugins;
 
 namespace LinkedinOutReach.browserDriverAction
 {
@@ -15,6 +13,20 @@ namespace LinkedinOutReach.browserDriverAction
         }
 
         public abstract Task Run(LinkedinProfile linkedinProfile);
+
+        protected async Task Click(string selector, int delayMin = 3000, int delayMax = 3500)
+        {
+            await this._browserDriver._page.ClickAsync(selector);
+            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            await Task.Delay(Random.Shared.Next(delayMin, delayMax));
+        }
+
+        protected async Task Fill(string selector, string value, int delayMin = 3000, int delayMax = 3500)
+        {
+            await this._browserDriver._page.FillAsync(selector, value);
+            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            await Task.Delay(Random.Shared.Next(delayMin, delayMax));
+        }
 
         protected async Task fillTextInputWithRetry(string selector, string value, int maxRetries = 3, int delayMin = 500, int delayMax = 1000)
         {
