@@ -20,20 +20,13 @@ namespace LinkedinOutReach.browserDriverAction
         public override async Task Run(LinkedinProfile linkedinProfile)
         {
             // Go to LinkedIn login page
-            await this.goToLinkedinLoginPageAsync();
+            await this.goToPage("https://www.linkedin.com/login/");
 
             // Fill form and submit
             await this.fillAndSubmitForm();
 
             // Check if login was successful by verifying the URL
             this.checkIfLoginSuccess();
-        }
-
-        private async Task goToLinkedinLoginPageAsync()
-        {
-            await this._browserDriver._page.GotoAsync("https://www.linkedin.com/login/");
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
-            await Task.Delay(Random.Shared.Next(500, 1000));
         }
 
         private async Task fillAndSubmitForm()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Playwright;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,6 +27,17 @@ namespace LinkedinOutReach.browserDriverAction
 
                 if (currentValue == value)
                     break;
+            }
+        }
+
+        protected async Task goToPage(string url, int delayMin = 500, int delayMax = 1000)
+        {
+            await this._browserDriver._page.GotoAsync(url);
+            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+            if (delayMax > 0)
+            {
+                await Task.Delay(Random.Shared.Next(delayMin, delayMax));
             }
         }
     }
