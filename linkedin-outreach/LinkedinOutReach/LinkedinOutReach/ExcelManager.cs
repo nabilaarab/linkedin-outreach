@@ -5,7 +5,7 @@ using System.Text;
 namespace LinkedinOutReach
 {
     internal class ExcelManager {
-        public LinkedinProfile[] _linkedinProfiles;
+        public LinkedinProfile[] LinkedinProfiles;
 
         public void loadLinkedinProfiles()
         {
@@ -13,7 +13,7 @@ namespace LinkedinOutReach
 
             string[] lines = File.ReadAllLines(filePath);
 
-            _linkedinProfiles = new LinkedinProfile[lines.Length];
+            this.LinkedinProfiles = new LinkedinProfile[lines.Length];
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -26,7 +26,7 @@ namespace LinkedinOutReach
                     columns[2],
                     columns[3]
                 );
-                _linkedinProfiles[i] = linkedinProfile;
+                this.LinkedinProfiles[i] = linkedinProfile;
             }
         }
     }

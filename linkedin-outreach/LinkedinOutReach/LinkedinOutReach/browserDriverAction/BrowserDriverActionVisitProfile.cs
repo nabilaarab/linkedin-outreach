@@ -4,9 +4,9 @@ using System.Text;
 
 namespace LinkedinOutReach.browserDriverAction
 {
-    internal class BrowserDriverActionMakeVisit : BrowserDriverAction
+    internal class BrowserDriverActionVisitProfile : BrowserDriverAction
     {
-        public BrowserDriverActionMakeVisit(BrowserDriver browserDriver) : base(browserDriver) { }
+        public BrowserDriverActionVisitProfile(BrowserDriver browserDriver) : base(browserDriver) { }
 
         public override async Task Run(LinkedinProfile linkedinProfile)
         {

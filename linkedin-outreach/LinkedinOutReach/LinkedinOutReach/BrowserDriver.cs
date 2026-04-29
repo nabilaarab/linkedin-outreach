@@ -13,25 +13,44 @@ namespace LinkedinOutReach
         public IBrowser _browser { get; private set; } = null!;
         public IPage _page { get; private set; } = null!;
         private List<BrowserDriverAction> _steps;
+        private BrowserDriverAction _actionSelected;
 
-        public BrowserDriver(string email, string password)
+        public BrowserDriver()
         {
-            this._steps = new List<BrowserDriverAction>();
-            this._steps.Add(new BrowserDriverActionConnexionLinkedin(this, email, password));
-            this._steps.Add(new BrowserDriverActionMakeVisit(this));
-            this._steps.Add(new BrowserDriverActionSendConnexion(this, "Ceci est un message"));
+            initBrowser().Wait();
+        }
+
+        public void SetAction(BrowserDriverAction action)
+        {
+            this._actionSelected = action;
+        }
+
+        public void Run(LinkedinProfile linkedinProfile)
+        {
+            this.RunStep(linkedinProfile, this._actionSelected).Wait();
         }
 
         public async Task RunSteps(LinkedinProfile linkedinProfile)
         {
             foreach (BrowserDriverAction step in this._steps)
             {
-                Console.WriteLine($"{step} Tentative");
-
-                await step.Run(linkedinProfile);
-
-                Console.WriteLine($"{step} OK");
+                await this.RunStep(linkedinProfile, step);
             }
+        }
+
+        public async Task RunStep(LinkedinProfile linkedinProfile, BrowserDriverAction step)
+        {
+            Console.WriteLine($"{step} Tentative");
+
+            await step.Run(linkedinProfile);
+            
+            Console.WriteLine($"{step} OK");
+        }
+
+        public async Task closeBrowser()
+        {
+            await _browser.CloseAsync();
+            Console.WriteLine("Browser closed !");
         }
 
         public async Task initBrowser()
