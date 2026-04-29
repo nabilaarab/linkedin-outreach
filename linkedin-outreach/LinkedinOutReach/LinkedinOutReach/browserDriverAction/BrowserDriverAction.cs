@@ -1,5 +1,6 @@
 ﻿using Microsoft.Playwright;
 using NuGet.Protocol.Plugins;
+using System.Xml.Linq;
 
 namespace LinkedinOutReach.browserDriverAction
 {
@@ -51,6 +52,16 @@ namespace LinkedinOutReach.browserDriverAction
             {
                 await Task.Delay(Random.Shared.Next(delayMin, delayMax));
             }
+        }
+
+        protected async Task WaitElementToBeVisible(string selector, int timeout = 50000)
+        {
+            await this._browserDriver._page.WaitForSelectorAsync(selector, new() { State = WaitForSelectorState.Visible, Timeout = timeout });
+        }
+
+        public override string ToString()
+        {
+            return "Action";
         }
     }
 }

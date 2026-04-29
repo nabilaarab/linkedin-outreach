@@ -8,10 +8,14 @@ namespace LinkedinOutReach.browserDriverAction
     {
         public BrowserDriverActionMakeVisit(BrowserDriver browserDriver) : base(browserDriver) { }
 
-        public override Task Run(LinkedinProfile linkedinProfile)
+        public override async Task Run(LinkedinProfile linkedinProfile)
         {
             await this.goToPage(linkedinProfile.Link);
-            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return "Action - Visite";
         }
     }
 }

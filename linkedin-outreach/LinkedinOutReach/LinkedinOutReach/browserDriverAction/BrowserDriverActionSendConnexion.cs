@@ -38,19 +38,24 @@ namespace LinkedinOutReach.browserDriverAction
 
         private async Task sendConnexionWithoutNote()
         {
-            await this.Click("span:has-text('Envoyer sans note')");
+            await this.Click("span:has-text('Add without note')");
         }
 
         private async Task sendConnexionWithNote(string message)
         {
             // Add note if wanted
-            await this.Click("span:has-text('Ajouter une note')");
+            await this.Click("span:has-text('Add a note')");
 
             // Fill the textarea
             await this.Fill("textarea[name='message']", message);
 
             // Send the connexion
-            await this.Click("span:has-text('Envoyer')");
+            await this.Click("span:has-text('Send')");
+        }
+
+        public override string ToString()
+        {
+            return "Action - Envoi de la connexion";
         }
     }
 }

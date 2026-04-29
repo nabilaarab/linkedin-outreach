@@ -1,4 +1,5 @@
 ﻿using LinkedinOutReach;
+using LinkedinOutReach.browserDriverAction;
 using Microsoft.Extensions.Configuration;
 
 var config = new ConfigurationBuilder()
@@ -8,18 +9,15 @@ var config = new ConfigurationBuilder()
 Console.WriteLine("Hello, World!");
 Console.WriteLine(config["Linkedin:Email"]);
 Console.WriteLine(config["Linkedin:Password"]);
+
 ExcelManager excelManager = new ExcelManager();
 
 excelManager.loadLinkedinProfiles();
+Console.WriteLine("Excel chargé !");
 
-BrowserDriver browserDriver = new BrowserDriver();
+BrowserDriver browserDriver = new BrowserDriver(config["Linkedin:Email"], config["Linkedin:Password"]);
 
 await browserDriver.initBrowser();
-
-await browserDriver.connectToLinkedin(config["Linkedin:Email"], config["Linkedin:Password"]);
-
-await browserDriver.makeVisit(excelManager._linkedinProfiles[0]);
-
-await browserDriver.sendConnexion(excelManager._linkedinProfiles[0], "Ceci est un message");
+await browserDriver.RunSteps(excelManager._linkedinProfiles[0]);
 
 Console.WriteLine();
