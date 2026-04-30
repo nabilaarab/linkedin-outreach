@@ -21,9 +21,9 @@ using Microsoft.Extensions.Configuration;
 //await browserDriver.RunSteps(excelManager._linkedinProfiles[0]);
 
 //Console.WriteLine();
-LinkedinOutReachManager linkedinOutReachManager = LinkedinOutReachManager.Initialization();
+SeriesAction linkedinOutReachManager = SeriesActionCampaign.InitializationDefault();
 
 var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.local.json")
             .Build();
-linkedinOutReachManager.RunCampaign(config["Linkedin:Email"], config["Linkedin:Password"]);
+linkedinOutReachManager.Run();

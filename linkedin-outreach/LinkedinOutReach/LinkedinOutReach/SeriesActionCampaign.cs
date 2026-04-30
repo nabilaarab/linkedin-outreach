@@ -1,4 +1,5 @@
 ﻿using LinkedinOutReach.browserDriverAction;
+using LinkedinOutReach.models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -6,24 +7,30 @@ using System.Text;
 
 namespace LinkedinOutReach
 {
-    internal class LinkedinOutReachManager
+    internal class SeriesActionCampaign : SeriesAction
     {
-        private readonly BrowserDriver _browserDriver;
-        private readonly LinkedinProfile[] _linkedinProfiles;
-        private readonly List<BrowserDriverAction> _actionDesired;
-        private readonly int _minTimeBetweenActions;
-        private readonly int _maxTimeBetweenActions;
-        
-        public LinkedinOutReachManager(BrowserDriver browserDriver, LinkedinProfile[] linkedinProfiles, List<BrowserDriverAction> actionDesired, int minTimeBetweenActions, int maxTimeBetweenActions)
-        {
-            this._browserDriver = browserDriver;
-            this._linkedinProfiles = linkedinProfiles;
-            this._actionDesired = actionDesired;
-            this._minTimeBetweenActions = minTimeBetweenActions;
-            this._maxTimeBetweenActions = maxTimeBetweenActions;
+        private readonly string _email;
+        private readonly string _password;
+        public SeriesActionCampaign(
+            BrowserDriver browserDriver, 
+            LinkedinProfile[] linkedinProfiles, 
+            List<BrowserDriverAction> actionDesired, 
+            int minTimeBetweenActions, 
+            int maxTimeBetweenActions,
+            string email,
+            string password) : base(
+                browserDriver, 
+                linkedinProfiles, 
+                actionDesired, 
+                minTimeBetweenActions, 
+                maxTimeBetweenActions
+
+        ){
+            this._email = email;
+            this._password = password;
         }
 
-        public static LinkedinOutReachManager Initialization()
+        public static SeriesActionCampaign InitializationDefault()
         {
             // Load ExcelManager
             ExcelManager excelManager = new ExcelManager();
@@ -40,21 +47,21 @@ namespace LinkedinOutReach
             actionDesired.Add(new BrowserDriverActionVisitProfile(browserDriver));
             actionDesired.Add(new BrowserDriverActionSendConnexion(browserDriver, "Hola !!!!"));
 
-            return new LinkedinOutReachManager(browserDriver, excelManager.LinkedinProfiles, actionDesired, 3000, 6000);
+            return new SeriesActionCampaign(browserDriver, excelManager.LinkedinProfiles, actionDesired, 3000, 6000, config["Linkedin:Email"], config["Linkedin:Password"]);
         }
 
-        public void RunCampaign(string email, string password)
+        public override void Run()
         {
             // First, connect to LinkedIn using the browser driver
             this._browserDriver.SetAction(
-                new BrowserDriverActionConnexionLinkedin(this._browserDriver, email, password)
+                new BrowserDriverActionConnexionLinkedin(this._browserDriver, this._email, this._password)
             );
             this._browserDriver.Run(null);
 
             // Second, run actions for each Linkedin profile
             foreach (LinkedinProfile linkedinProfile in this._linkedinProfiles)
             {
-                
+
                 foreach (BrowserDriverAction action in _actionDesired)
                 {
                     // Realize the action for the current profile
@@ -64,16 +71,9 @@ namespace LinkedinOutReach
                     // Wait a random time between actions to simulate human behavior
                     this.waitRandomTime();
                 }
-                
+
                 Console.WriteLine($"Campaign completed for {linkedinProfile.Name} profile.");
             }
-        }
-
-        private void waitRandomTime()
-        {
-            int delay = Random.Shared.Next(this._minTimeBetweenActions, this._maxTimeBetweenActions);
-            Console.WriteLine($"Waiting for {delay} ms before processing the next action...");
-            Task.Delay(delay).Wait();
         }
     }
 }

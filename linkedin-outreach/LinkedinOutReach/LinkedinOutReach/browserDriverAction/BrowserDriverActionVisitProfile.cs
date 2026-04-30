@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkedinOutReach.models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

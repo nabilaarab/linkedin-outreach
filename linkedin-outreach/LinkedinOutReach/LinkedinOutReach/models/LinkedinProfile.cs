@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LinkedinOutReach
+namespace LinkedinOutReach.models
 {
     internal class LinkedinProfile
     {

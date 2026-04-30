@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using LinkedinOutReach.models;
+using Microsoft.Playwright;
 using NuGet.Protocol.Plugins;
 using System.Xml.Linq;
 

@@ -1,4 +1,5 @@
 ﻿using LinkedinOutReach.browserDriverAction;
+using LinkedinOutReach.models;
 using Microsoft.Playwright;
 using NuGet.Protocol.Plugins;
 using System;

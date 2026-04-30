@@ -1,4 +1,5 @@
 ﻿using LinkedinOutReach.exceptions;
+using LinkedinOutReach.models;
 using Microsoft.Playwright;
 using System;
 using System.Collections.Generic;
