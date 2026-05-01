@@ -39,10 +39,22 @@ namespace LinkedinOutReach
             this._browserDriver.Run(null);
 
             // Then, explore new profiles
-            this._browserDriver.SetAction(
-                new BrowserDriverActionNewProfilesExtraction(this._browserDriver, "IT Manager")
-            );
-            this._browserDriver.Run(null);
+            BrowserDriverActionSearchProfileExtraction bdaNewProfilesExtraction = new BrowserDriverActionSearchProfileExtraction(this._browserDriver, "IT Manager"); ;
+            this._browserDriver.SetAction(bdaNewProfilesExtraction);
+
+            for (int i = 1; i <= 100; i++)
+            {
+                bdaNewProfilesExtraction.PageNumber = i;
+                this._browserDriver.Run(null);
+
+                //this.extractInformationFromPageContent(bdaNewProfilesExtraction.LastPageContent);
+            }
+        }
+
+        private void extractInformationFromPageContent(string pageContent)
+        {
+            // TODO : extract information from the page content and save it in the excel file
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Text;
 
 namespace LinkedinOutReach.browserDriverAction
 {
-    internal class BrowserDriverActionNewProfilesExtraction : BrowserDriverAction
+    internal class BrowserDriverActionSearchProfileExtraction : BrowserDriverAction
     {
         public string KeyWords { get; set; }
         public string? GeoUrn { get; set; }
         public int? PageNumber { get; set; }
         public string? LastPageContent { get; private set; }
         
-        public BrowserDriverActionNewProfilesExtraction(BrowserDriver browserDriver, string KeyWords, string? GeoUrn = null, int? PageNumber = null) : base(browserDriver)
+        public BrowserDriverActionSearchProfileExtraction(BrowserDriver browserDriver, string KeyWords, string? GeoUrn = null, int? PageNumber = null) : base(browserDriver)
         {
             this.KeyWords = KeyWords;
             this.GeoUrn = GeoUrn;
@@ -34,8 +34,8 @@ namespace LinkedinOutReach.browserDriverAction
         {
             string url = $"https://www.linkedin.com/search/results/people/?keywords={this.KeyWords}";
 
-            if (!string.IsNullOrEmpty(this.GeoUrn)){
-                url += $"&page=[\"{this.PageNumber}\"]";
+            if (this.PageNumber.HasValue){
+                url += $"&page={this.PageNumber}";
             }
 
             if (!string.IsNullOrEmpty(this.GeoUrn)){
@@ -47,7 +47,7 @@ namespace LinkedinOutReach.browserDriverAction
 
         public override string ToString()
         {
-            return "Action - Extraction de nouveaux profils";
+            return "Action - Extraction de nouveaux profiles";
         }
     }
 }
