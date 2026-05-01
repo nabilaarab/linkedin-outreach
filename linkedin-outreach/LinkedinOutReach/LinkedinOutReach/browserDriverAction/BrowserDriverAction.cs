@@ -57,7 +57,9 @@ namespace LinkedinOutReach.browserDriverAction
 
         protected async Task WaitElementToBeVisible(string selector, int timeout = 50000)
         {
-            await this._browserDriver._page.WaitForSelectorAsync(selector, new() { State = WaitForSelectorState.Visible, Timeout = timeout });
+
+            //await this._browserDriver._page.WaitForSelectorAsync(selector, new() { State = WaitForSelectorState.Visible, Timeout = timeout });
+            await this._browserDriver._page.WaitForSelectorAsync(selector);
         }
 
         public override string ToString()

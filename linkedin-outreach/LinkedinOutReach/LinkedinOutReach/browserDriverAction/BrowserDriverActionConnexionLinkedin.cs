@@ -33,22 +33,47 @@ namespace LinkedinOutReach.browserDriverAction
 
         private async Task FillAndSubmitForm()
         {
-            await this.WaitElementToBeVisible("#username");
-            await this.Click("#username");
-            await this.fillTextInputWithRetry("#username", this._email);
+            string xPath = "xpath=//*[@id='username' or @id=':r3:']";
+            await this.WaitElementToBeVisible(xPath);
+            await this.Click(xPath, 0, 100);
+            await this.fillTextInputWithRetry(xPath, this._email, 3, 0, 100);
 
-            await this.WaitElementToBeVisible("#password");
-            await this.Click("#password");
-            await this.fillTextInputWithRetry("#password", this._password);
+            xPath = "xpath=//*[@id='password' or @id=':r4:']";
+            await this.WaitElementToBeVisible(xPath);
+            await this.Click(xPath, 0, 100);
+            await this.fillTextInputWithRetry(xPath, this._password, 3, 0, 100);
 
-            await this.Click("button[type='submit']");
-            await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+            //await this.Click("xpath=//button[@type='submit' or @type='button']");
+            //xPath = "xpath=//button[normalize-space()='Sign in'] | (//button)[4]";
+            xPath = "xpath=//button[@type='submit'] | (//button[@type='button' and .//span/span[normalize-space(text())='Sign in']])[2]";
+            //xPath = "xpath=//button[@type='submit']";
+            await this.Click(xPath);
+            //await this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+
+            //this.clickSignInButton();
+        }
+
+        private void clickSignInButton()
+        {
+            string xPath = "xpath=(//button[@type='button' and .//span/span[normalize-space(text())='Sign in']])[2]";
+            xPath += " | //button[type='submit']";
+
+            var signInButton = this._browserDriver._page.Locator(xPath);
+
+            signInButton.ScrollIntoViewIfNeededAsync().Wait();
+            signInButton.ClickAsync().Wait();
+            this._browserDriver._page.WaitForLoadStateAsync(LoadState.DOMContentLoaded).Wait();
+            Task.Delay(Random.Shared.Next(3000, 5000)).Wait();
         }
 
         private void CheckIfLoginSuccess()
         {
             string currentUrl = this._browserDriver._page.Url;
-            if (!currentUrl.Contains("feed"))
+            if (currentUrl.Contains("checkpoint"))
+            {
+                Task.Delay(Random.Shared.Next(30000, 50000)).Wait();
+            }
+            else if (!currentUrl.Contains("feed"))
             {
                 string errorMessage = $"[BrowserDriverActionConnexionLinkedin] Failed to login, current URL: {currentUrl}";
                 Console.WriteLine(errorMessage);

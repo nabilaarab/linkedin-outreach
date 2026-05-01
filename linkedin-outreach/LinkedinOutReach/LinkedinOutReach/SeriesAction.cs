@@ -14,14 +14,18 @@ namespace LinkedinOutReach
         protected readonly List<BrowserDriverAction> _actionDesired;
         protected readonly int _minTimeBetweenActions;
         protected readonly int _maxTimeBetweenActions;
-        
-        public SeriesAction(BrowserDriver browserDriver, LinkedinProfile[] linkedinProfiles, List<BrowserDriverAction> actionDesired, int minTimeBetweenActions, int maxTimeBetweenActions)
+        protected string _email;
+        protected string _password;
+
+        public SeriesAction(BrowserDriver browserDriver, LinkedinProfile[] linkedinProfiles, List<BrowserDriverAction> actionDesired, int minTimeBetweenActions, int maxTimeBetweenActions, string email, string password)
         {
             this._browserDriver = browserDriver;
             this._linkedinProfiles = linkedinProfiles;
             this._actionDesired = actionDesired;
             this._minTimeBetweenActions = minTimeBetweenActions;
             this._maxTimeBetweenActions = maxTimeBetweenActions;
+            this._email = email;
+            this._password = password;
         }
 
         public abstract void Run();

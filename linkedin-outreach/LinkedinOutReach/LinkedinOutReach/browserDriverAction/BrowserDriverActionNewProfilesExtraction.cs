@@ -1,4 +1,5 @@
 ﻿using LinkedinOutReach.models;
+using Microsoft.Playwright;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,20 +8,42 @@ namespace LinkedinOutReach.browserDriverAction
 {
     internal class BrowserDriverActionNewProfilesExtraction : BrowserDriverAction
     {
-        public BrowserDriverActionNewProfilesExtraction(BrowserDriver browserDriver) : base(browserDriver) { }
-        public override async Task Run(LinkedinProfile linkedinProfile)
+        public string KeyWords { get; set; }
+        public string? GeoUrn { get; set; }
+        public int? PageNumber { get; set; }
+        public string? LastPageContent { get; private set; }
+        
+        public BrowserDriverActionNewProfilesExtraction(BrowserDriver browserDriver, string KeyWords, string? GeoUrn = null, int? PageNumber = null) : base(browserDriver)
         {
-            for (int i = 1; i <= 100; i++)
-            {
-                this.goToPeopleSearchPage("IT Manager", i);
-                Task.Delay(Random.Shared.Next(5000, 6000)).Wait();
-            }
+            this.KeyWords = KeyWords;
+            this.GeoUrn = GeoUrn;
+            this.PageNumber = PageNumber;
         }
 
-        private void goToPeopleSearchPage(string keyword, int pageNumber)
+        public override async Task Run(LinkedinProfile linkedinProfile)
         {
-            string url = $"https://www.linkedin.com/search/results/people/?keywords={keyword}&page={pageNumber}";
-            this.goToPage(url);
+            // Go to the page
+            this.goToPeopleSearchPage();
+
+            // Get the content
+            //await this._browserDriver._page.EvaluateAsync("window.stop()");
+            this.LastPageContent = await this._browserDriver._page.ContentAsync();
+            Task.Delay(Random.Shared.Next(50000, 60000)).Wait();
+        }
+
+        private void goToPeopleSearchPage()
+        {
+            string url = $"https://www.linkedin.com/search/results/people/?keywords={this.KeyWords}";
+
+            if (!string.IsNullOrEmpty(this.GeoUrn)){
+                url += $"&page=[\"{this.PageNumber}\"]";
+            }
+
+            if (!string.IsNullOrEmpty(this.GeoUrn)){
+                url += $"&geoUrn=[\"{this.GeoUrn}\"]";
+            }
+
+            this.goToPage(url, 3000, 5000);
         }
 
         public override string ToString()

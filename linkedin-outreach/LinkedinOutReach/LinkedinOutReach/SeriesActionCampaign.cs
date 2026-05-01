@@ -9,8 +9,6 @@ namespace LinkedinOutReach
 {
     internal class SeriesActionCampaign : SeriesAction
     {
-        private readonly string _email;
-        private readonly string _password;
         public SeriesActionCampaign(
             BrowserDriver browserDriver, 
             LinkedinProfile[] linkedinProfiles, 
@@ -23,12 +21,10 @@ namespace LinkedinOutReach
                 linkedinProfiles, 
                 actionDesired, 
                 minTimeBetweenActions, 
-                maxTimeBetweenActions
-
-        ){
-            this._email = email;
-            this._password = password;
-        }
+                maxTimeBetweenActions,
+                email,
+                password
+        ){}
 
         public static SeriesActionCampaign InitializationDefault()
         {
