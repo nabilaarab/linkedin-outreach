@@ -103,16 +103,58 @@ namespace LinkedinOutReach
         {
             List<LinkedinProfile> linkedinProfiles = new List<LinkedinProfile>();
             HtmlDocument doc = new HtmlDocument();
+
+            string id;
+            string link;
+            string name;
+            string companyName;
+            string currentJob;
+            string jobCompanyInfoStr;
+            string docInnerText;
+            string[] jobCompanyInfo;
+            LinkedinProfile linkedinProfile;
             foreach (string divProfile in divProfiles)
             {
                 doc.LoadHtml(divProfile);
-                
-                string name = doc.DocumentNode.SelectNodes(".//a").FirstOrDefault(a => !string.IsNullOrEmpty(a.InnerText.Trim())).InnerText.Trim();
+
+                // Get the name and the id of the profile
+                var element = doc.DocumentNode.SelectNodes(".//a").FirstOrDefault(a => !string.IsNullOrEmpty(a.InnerText.Trim()));
+
+                link = element.GetAttributeValue("href", "");
+
+                id = link.Remove(0, link.LastIndexOf("/in/") + 4);
+                id = id.Replace("/", "");
+
+                name = element.InnerText.Trim();
+
+                companyName = "";
+                currentJob = "";
+                docInnerText = doc.DocumentNode.InnerText;
+                if (docInnerText.Contains("Current: "))
+                {
+
+                    jobCompanyInfoStr = doc.DocumentNode.SelectSingleNode("//p[contains(string(), ' at ')]").InnerText;
+                    jobCompanyInfo = jobCompanyInfoStr.Split(" at ");
+
+                    currentJob = jobCompanyInfo[0];
+                    currentJob = currentJob.Replace("Current: ", "");
+                    currentJob = currentJob.Trim();
+
+                    companyName = jobCompanyInfo[1].Trim();
+                }
+
+                linkedinProfile = new LinkedinProfile(
+                    id,
+                    link,
+                    name,
+                    companyName
+                );
+
+                linkedinProfiles.Add(linkedinProfile);
 
                 Console.WriteLine();
-                //LinkedinProfile profile = new LinkedinProfile();
-                //linkedinProfiles.Add(profile);
             }
+
             return linkedinProfiles;
         }
     }
