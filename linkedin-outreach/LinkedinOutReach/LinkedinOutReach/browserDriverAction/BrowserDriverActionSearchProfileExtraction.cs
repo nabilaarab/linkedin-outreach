@@ -27,7 +27,7 @@ namespace LinkedinOutReach.browserDriverAction
 
             // Get the content
             this.LastPageContent = await this._browserDriver._page.InnerHTMLAsync("body");
-            Task.Delay(Random.Shared.Next(50000, 60000)).Wait();
+            Task.Delay(Random.Shared.Next(5000, 6000)).Wait();
         }
 
         private void goToPeopleSearchPage()
