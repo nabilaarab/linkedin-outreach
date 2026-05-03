@@ -49,7 +49,7 @@ namespace LinkedinOutReach
 
             List<LinkedinProfile> linkedinProfiles = new List<LinkedinProfile>();
             List<LinkedinProfile> linkedinProfilesToConcat;
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 // Change the current page
                 bdaNewProfilesExtraction.PageNumber = i;
@@ -67,6 +67,9 @@ namespace LinkedinOutReach
 
                 linkedinProfiles.AddRange(linkedinProfilesToConcat);
             }
+
+            ExcelManager excelManager = new ExcelManager();
+            excelManager.uploadLinkedinProfiles(linkedinProfiles);
         }
     }
 }
